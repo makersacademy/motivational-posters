@@ -1,10 +1,4 @@
 google.load("search", "1");
-//+ Jonas Raoni Soares Silva
-//@ http://jsfromhell.com/array/shuffle [v1.0]
-function shuffle(o){ //v1.0
-    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
-};
 
 function findImagesOnGoogle(options) {  
   $(options.container).empty();
@@ -16,7 +10,10 @@ function findImagesOnGoogle(options) {
     $(options.container).empty();
     for (var i = 0; i < imageSearch.results.length; i++) {
       var result = imageSearch.results[i];      
-      $("<img>").attr('src', result.tbUrl).appendTo(options.container);
+      var img = $("<img>");
+      img.attr('src', result.tbUrl);
+      img.data('url', result.url);
+      img.appendTo(options.container);
     }
   }, null);
   imageSearch.setResultSetSize(8);
