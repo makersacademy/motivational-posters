@@ -8,3 +8,11 @@ body {
 	border: 5px dashed red;
 	margin: 0 auto;
 }
+
+#caption {	
+	left: 10px;
+	top: 10px;
+	width: 400px;	
+	font-size: 32px;
+	color: red;
+}

@@ -19,5 +19,3 @@ function findImagesOnGoogle(options) {
   imageSearch.setResultSetSize(8);
   imageSearch.execute(options.keywords);  
 }
-
-
