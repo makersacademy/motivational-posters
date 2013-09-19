@@ -1,3 +1,4 @@
+google.load("search", "1");
 //+ Jonas Raoni Soares Silva
 //@ http://jsfromhell.com/array/shuffle [v1.0]
 function shuffle(o){ //v1.0
@@ -5,26 +6,21 @@ function shuffle(o){ //v1.0
     return o;
 };
 
-function findImagesOnFlickr(options) {  
+function findImagesOnGoogle(options) {  
   $(options.container).empty();
   $(options.container).append($("<p>").text("Searching..."));
-  var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-  $.getJSON( flickerAPI, {
-    tags: options.keyword.replace(' ', ','),
-    tagmode: "all",
-    format: "json"
-  })
-    .done(function( data ) {      
-      data.items = shuffle(data.items);
-      $(options.container).empty();
-      if (data.items.length === 0) {
-        $(options.container).append($("<p>").text("No images found"));
-      }
-      $.each( data.items, function( i, item ) {
-        $( "<img>" ).attr( "src", item.media.m ).appendTo( options.container );
-        if ( i === 3 ) {
-          return false;
-        }
-      });
-    });    
+
+  var imageSearch = new google.search.ImageSearch();
+  imageSearch.setSearchCompleteCallback(this, function() {
+    google.search.Search.getBranding('branding');
+    $(options.container).empty();
+    for (var i = 0; i < imageSearch.results.length; i++) {
+      var result = imageSearch.results[i];      
+      $("<img>").attr('src', result.tbUrl).appendTo(options.container);
+    }
+  }, null);
+  imageSearch.setResultSetSize(8);
+  imageSearch.execute(options.keywords);  
 }
+
+
