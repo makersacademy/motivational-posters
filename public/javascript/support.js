@@ -19,3 +19,41 @@ function findImagesOnGoogle(options) {
   imageSearch.setResultSetSize(8);
   imageSearch.execute(options.keywords);  
 }
+
+function saveParametersToHash() {
+  $('input').change(function() {
+    var hash = {};
+    hash.caption = $("#text").val();
+    hash.size = $('#size').val();
+    hash.left = $('#left').val();
+    hash.top = $('#top').val();
+    hash.width = $('#width').val();
+    hash.colour = $('#colour').val();
+    hash.align = $('#align').val();
+    hash.url = $('#workspace img').attr("src");
+    hash.keyword = $('#search-term').val();
+    window.location.hash = escape(JSON.stringify(hash));
+  });  
+}
+
+function loadParametersFromHash() {  
+  try {
+    var hash = JSON.parse(unescape(window.location.hash).replace('#', ''));
+    $('#text').val(hash.caption);
+    $('#size').val(hash.size);
+    $('#left').val(hash.left);
+    $('#top').val(hash.top);
+    $('#width').val(hash.width);
+    $('#colour').val(hash.colour);
+    $('#align').val(hash.align);
+    $('input, select').trigger('change');
+    $('#workspace').append($('<img>').attr("src", hash.url));
+    $('#search-term').val(hash.keyword);
+  } catch (err) {}
+}
+
+$(function() {
+  loadParametersFromHash();
+  saveParametersToHash();
+  $('#text').trigger("input");
+})
