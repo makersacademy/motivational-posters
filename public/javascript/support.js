@@ -33,6 +33,7 @@ function saveParametersToHash() {
     hash.url = $('#workspace img').attr("src");
     hash.keyword = $('#search-term').val();
     window.location.hash = escape(JSON.stringify(hash));
+    updateTweetButton();
   });  
 }
 
@@ -52,8 +53,12 @@ function loadParametersFromHash() {
   } catch (err) {}
 }
 
+function updateTweetButton() {
+  $("#twitter a").data("url", window.location.href);
+}
+
 $(function() {
   loadParametersFromHash();
-  saveParametersToHash();
+  saveParametersToHash();  
   $('#text').trigger("input");
 })
