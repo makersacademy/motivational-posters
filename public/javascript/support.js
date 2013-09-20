@@ -21,7 +21,7 @@ function findImagesOnGoogle(options) {
 }
 
 function saveParametersToHash() {
-  $('input').change(function() {
+  $('input, select').change(function() {
     var hash = {};
     hash.caption = $("#text").val();
     hash.size = $('#size').val();
@@ -56,10 +56,10 @@ function loadParametersFromHash() {
 function updateTweetButton() {    
   $('#twitter').empty();
   var a = $('<a>')
-            // .attr("data-url", window.location.href)
+            .attr("data-url", window.location.href)
             .attr("href", "https://twitter.com/share")
             .addClass("twitter-share-button")
-            .attr("data-text", "I built Motivational Posters page @makersacademy today!")
+            .attr("data-text", "I built Motivational Posters page today @makersacademy!")
             .append($("Tweet"));
   a.appendTo('#twitter');
   twttr.widgets.load();
