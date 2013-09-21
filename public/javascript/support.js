@@ -54,17 +54,18 @@ function loadParametersFromHash() {
 }
 
 function updateTweetButton() {    
+  if (typeof twttr == 'undefined') {
+    return;
+  }
   $('#twitter').empty();
   var a = $('<a>')
-            .attr("data-url", window.location.href)
+            // .attr("data-url", window.location.href)
             .attr("href", "https://twitter.com/share")
             .addClass("twitter-share-button")
-            .attr("data-text", "I built Motivational Posters page today @makersacademy!")
+            .attr("data-text", "I built Motivational Posters page @makersacademy today!")
             .append($("Tweet"));
   a.appendTo('#twitter');
-  if (twttr) {
-    twttr.widgets.load();
-  }
+  twttr.widgets.load();
 }
 
 $(function() {
