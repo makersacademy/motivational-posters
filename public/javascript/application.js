@@ -10,7 +10,6 @@ $(document).on('click', '#search-results img', function() {
 });
 
 $(document).on('input', '#text', function() {
-  console.log("text input")
   $("#caption").text($(this).val());
 });
 
@@ -34,15 +33,9 @@ $(document).on('change', '#colour', function() {
   $("#caption").css("color", $(this).val());
 });
 
-$(document).on('change', '#align', function() {
-  console.log("updating align")
+$(document).on('change', '#align', function() {  
   $("#caption").css("text-align", $(this).val());
 });  
-
-$(document).on('change', '#align', function() {
-  console.log("updating align 2");
-  $("#caption").css("text-align", $(this).val());
-});
 
 $(document).ready(function() {
   $('#text').trigger("input");

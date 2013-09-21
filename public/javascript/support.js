@@ -62,7 +62,9 @@ function updateTweetButton() {
             .attr("data-text", "I built Motivational Posters page today @makersacademy!")
             .append($("Tweet"));
   a.appendTo('#twitter');
-  twttr.widgets.load();
+  if (twttr) {
+    twttr.widgets.load();
+  }
 }
 
 $(function() {
